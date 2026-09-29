@@ -5,7 +5,7 @@
 
         <div class="row g-3 mb-4">
             <div class="col-6 col-md-3">
-                <a href="" class="text-decoration-none">
+                <a href="{{ route('user.index') }}" class="text-decoration-none">
                     <div class="card text-bg-primary shadow-sm h-100">
                         <div class="card-body">
                             <div class="small text-uppercase">Students</div>
@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="col-6 col-md-3">
-                <a href="" class="text-decoration-none">
+                <a href="{{ route('course.index') }}" class="text-decoration-none">
                     <div class="card text-bg-success shadow-sm h-100">
                         <div class="card-body">
                             <div class="small text-uppercase">Courses</div>
