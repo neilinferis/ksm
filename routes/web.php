@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,12 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/index', [UserController::class, 'index'])->name('index');
         Route::get('/create', [UserController::class, 'create'])->name('create');
         Route::post('/store', [UserController::class, 'store'])->name('store');
+    });
+
+    Route::group(['prefix' => 'course', 'as' => 'course.'], function() {
+        Route::get('/index', [CourseController::class, 'index'])->name('index');
+        Route::get('/create', [CourseController::class, 'create'])->name('create');
+        Route::post('/store', [CourseController::class, 'store'])->name('store');
     });
 
     // ENROLLMENT
