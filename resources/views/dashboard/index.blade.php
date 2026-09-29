@@ -38,7 +38,7 @@
                 </a>
             </div>
             <div class="col-6 col-md-3">
-                <a href="" class="text-decoration-none">
+                <a href="{{ route('grades.index') }}" class="text-decoration-none">
                     <div class="card text-bg-info shadow-sm h-100">
                         <div class="card-body">
                             <div class="small text-uppercase">Grades</div>
