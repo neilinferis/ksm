@@ -4,29 +4,19 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\GradeController;
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [HomeController::class, 'index'])->name('index');
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function() {
         Route::get('/index', [UserController::class, 'index'])->name('index');
         Route::get('/create', [UserController::class, 'create'])->name('create');
         Route::post('/store', [UserController::class, 'store'])->name('store');
     });
-use App\Http\Controllers\EnrollmentController;
-use App\Http\Controllers\GradeController;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // ENROLLMENT
     Route::get('/enrollments', [EnrollmentController::class, 'index'])->name('enrollments.index');
