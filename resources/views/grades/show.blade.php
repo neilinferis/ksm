@@ -25,7 +25,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="ps-4 fw-medium">IT101 &middot; Intro to Programming</td>
+                            <td class="ps-4 fw-medium"></td>
                             <td>1st Semester, 2025-2026</td>
                             <td class="fw-bold">1.50</td>
                             <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Passed</span></td>
