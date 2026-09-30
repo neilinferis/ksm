@@ -26,51 +26,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="ps-4 fw-medium">Dela Cruz, Juan</td>
-                            <td>IT101 &middot; Intro to Programming</td>
-                            <td>Aug 01, 2025</td>
-                            <td>1st Semester</td>
-                            <td>2025-2026</td>
-                            <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Enrolled</span></td>
-                            <td class="text-end pe-4 text-nowrap">
-                                <a href="{{ route('enrollments.show') }}" class="btn btn-sm btn-outline-secondary">View</a>
-                                <a href="{{ route('enrollments.edit') }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                                <form action="#" method="POST" class="d-inline">
-                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-medium">Santos, Maria</td>
-                            <td>IT102 &middot; Database Systems</td>
-                            <td>Aug 01, 2025</td>
-                            <td>1st Semester</td>
-                            <td>2025-2026</td>
-                            <td><span class="badge rounded-pill bg-primary-subtle text-primary-emphasis">Completed</span></td>
-                            <td class="text-end pe-4 text-nowrap">
-                                <a href="#" class="btn btn-sm btn-outline-secondary">View</a>
-                                <a href="#" class="btn btn-sm btn-outline-primary">Edit</a>
-                                <form action="#" method="POST" class="d-inline">
-                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-medium">Reyes, Pedro</td>
-                            <td>IT103 &middot; Web Development</td>
-                            <td>Aug 02, 2025</td>
-                            <td>1st Semester</td>
-                            <td>2025-2026</td>
-                            <td><span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis">Dropped</span></td>
-                            <td class="text-end pe-4 text-nowrap">
-                                <a href="#" class="btn btn-sm btn-outline-secondary">View</a>
-                                <a href="#" class="btn btn-sm btn-outline-primary">Edit</a>
-                                <form action="#" method="POST" class="d-inline">
-                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+
+                        @foreach ($enrollments as $enrollment)
+                            <tr>
+                                <td>{{ $enrollment->user->first_name }} {{ $enrollment->user->last_name }}</td>
+                                <td>{{ $enrollment->course->name }}</td>
+                                <td>{{ $enrollment->enrollment_date }}</td>
+                                <td>{{ $enrollment->semester }}</td>
+                                <td>{{ $enrollment->school_year }}</td>
+                                <td><span
+                                        class="badge rounded-pill bg-{{ $enrollment->status === 'Enrolled' ? 'success' : ($enrollment->status === 'Completed' ? 'primary' : 'danger') }}-subtle text-{{ $enrollment->status === 'Enrolled' ? 'success' : ($enrollment->status === 'Completed' ? 'primary' : 'danger') }}-emphasis">{{ $enrollment->status }}</span>
+                                </td>
+                                <td class="text-end pe-4 text-nowrap">
+                                    <a href="{{ route('enrollments.show', $enrollment->id) }}"
+                                        class="btn btn-sm btn-outline-secondary">View</a>
+                                    <a href="{{ route('enrollments.edit', $enrollment->id) }}"
+                                        class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <form action="{{ route('enrollments.destroy', $enrollment->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>

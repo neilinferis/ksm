@@ -28,8 +28,11 @@ Route::group(['middleware' => 'auth'], function() {
     // ENROLLMENT
     Route::get('/enrollments', [EnrollmentController::class, 'index'])->name('enrollments.index');
     Route::get('/enrollments/create', [EnrollmentController::class, 'create'])->name('enrollments.create');
-    Route::get('/enrollments/edit', [EnrollmentController::class, 'edit'])->name('enrollments.edit');
-    Route::get('/enrollments/show', [EnrollmentController::class, 'show'])->name('enrollments.show');
+    Route::post('/enrollments/store', [EnrollmentController::class, 'store'])->name('enrollments.store');
+    Route::get('/enrollments/edit/{id}', [EnrollmentController::class, 'edit'])->name('enrollments.edit');
+    Route::patch('/enrollments/update/{id}', [EnrollmentController::class, 'update'])->name('enrollments.update');
+    Route::get('/enrollments/show/{id}', [EnrollmentController::class, 'show'])->name('enrollments.show');
+    Route::delete('/enrollments/destroy/{id}', [EnrollmentController::class, 'destroy'])->name('enrollments.destroy');
 
     // GRADES
     Route::get('/grades', [GradeController::class, 'index'])->name('grades.index');
