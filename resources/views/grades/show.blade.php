@@ -25,23 +25,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="ps-4 fw-medium"></td>
-                            <td>1st Semester, 2025-2026</td>
-                            <td class="fw-bold">1.50</td>
-                            <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Passed</span></td>
+                            <td class="ps-4 fw-medium">{{ $grade->enrollment->course->course_code }} - {{ $grade->enrollment->course->name }}</td>
+                            <td>{{ $grade->enrollment->semester }} Semester, {{ $grade->enrollment->academic_year }}</td>
+                            <td class="fw-bold">{{ $grade->grade }}</td>
+                            <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">{{ $grade->remarks }}</span></td>
                             <td class="text-end pe-4 text-nowrap">
-                                <a href="#" class="btn btn-sm btn-outline-primary">Edit</a>
-                                <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-medium">IT102 &middot; Database Systems</td>
-                            <td>2nd Semester, 2025-2026</td>
-                            <td class="fw-bold">2.00</td>
-                            <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Passed</span></td>
-                            <td class="text-end pe-4 text-nowrap">
-                                <a href="{{ route('grades.edit') }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                                <a href="{{ route('grades.delete') }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                <a href="{{ route('grades.edit', $grade) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a href="{{ route('grades.delete', $grade) }}" class="btn btn-sm btn-outline-danger">Delete</a>
                             </td>
                         </tr>
                     </tbody>

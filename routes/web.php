@@ -37,7 +37,10 @@ Route::group(['middleware' => 'auth'], function() {
     // GRADES
     Route::get('/grades', [GradeController::class, 'index'])->name('grades.index');
     Route::get('/grades/create', [GradeController::class, 'create'])->name('grades.create');
-    Route::get('/grades/edit', [GradeController::class, 'edit'])->name('grades.edit');
-    Route::get('/grades/show', [GradeController::class, 'show'])->name('grades.show');
-    Route::get('/grades/delete', [GradeController::class, 'delete'])->name('grades.delete');
+    Route::post('/grades/store', [GradeController::class, 'store'])->name('grades.store');
+    Route::get('/grades/edit/{id}', [GradeController::class, 'edit'])->name('grades.edit');
+    Route::get('/grades/show/{id}', [GradeController::class, 'show'])->name('grades.show');
+    Route::patch('/grades/update/{id}', [GradeController::class, 'update'])->name('grades.update');
+    Route::get('/grades/delete/{id}', [GradeController::class, 'delete'])->name('grades.delete');
+    Route::delete('/grades/destroy/{id}', [GradeController::class, 'destroy'])->name('grades.destroy');
 });
