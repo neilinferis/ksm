@@ -25,42 +25,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="ps-4 fw-medium">Dela Cruz, Juan</td>
-                            <td>IT101 &middot; Intro to Programming</td>
-                            <td>1st Semester, 2025-2026</td>
-                            <td class="fw-bold">1.50</td>
-                            <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Passed</span></td>
-                            <td class="text-end pe-4 text-nowrap">
-                                <a href="{{ route('grades.show') }}" class="btn btn-sm btn-outline-secondary">View</a>
-                                <a href="{{ route('grades.edit') }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                                <a href="{{ route('grades.delete') }}" class="btn btn-sm btn-outline-danger">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-medium">Santos, Maria</td>
-                            <td>IT102 &middot; Database Systems</td>
-                            <td>1st Semester, 2025-2026</td>
-                            <td class="fw-bold">1.75</td>
-                            <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Passed</span></td>
-                            <td class="text-end pe-4 text-nowrap">
-                                <a href="#" class="btn btn-sm btn-outline-secondary">View</a>
-                                <a href="#" class="btn btn-sm btn-outline-primary">Edit</a>
-                                <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 fw-medium">Reyes, Pedro</td>
-                            <td>IT103 &middot; Web Development</td>
-                            <td>1st Semester, 2025-2026</td>
-                            <td class="fw-bold">5.00</td>
-                            <td><span class="badge rounded-pill bg-danger-subtle text-danger-emphasis">Failed</span></td>
-                            <td class="text-end pe-4 text-nowrap">
-                                <a href="#" class="btn btn-sm btn-outline-secondary">View</a>
-                                <a href="#" class="btn btn-sm btn-outline-primary">Edit</a>
-                                <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
-                            </td>
-                        </tr>
+                       @foreach ($grades as $grade)
+                           <tr>
+                               <td class="ps-4 fw-medium">{{ $grade->enrollment->user->first_name }} {{ $grade->enrollment->user->last_name }}</td>
+                               <td>{{ $grade->enrollment->course->course_code }} - {{ $grade->enrollment->course->name }}</td>
+                               <td>{{ $grade->enrollment->semester }} Semester, {{ $grade->enrollment->academic_year }}</td>
+                               <td class="fw-bold">{{ $grade->grade }}</td>
+                               <td><span class="badge rounded-pill bg-{{ $grade->remarks === 'Passed' ? 'success' : ($grade->remarks === 'Failed' ? 'danger' : 'warning') }}-subtle text-{{ $grade->remarks === 'Passed' ? 'success' : ($grade->remarks === 'Failed' ? 'danger' : 'warning') }}-emphasis">{{ $grade->remarks }}</span></td>
+                               <td class="text-end pe-4 text-nowrap">
+                                   <a href="{{ route('grades.show', $grade->id) }}" class="btn btn-sm btn-outline-secondary">View</a>
+                                   <a href="{{ route('grades.edit', $grade->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                   <a href="{{ route('grades.delete', $grade->id) }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                               </td>
+                           </tr>
+                       @endforeach
                     </tbody>
                 </table>
             </div>

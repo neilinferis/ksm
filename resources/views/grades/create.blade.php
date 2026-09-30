@@ -10,31 +10,40 @@
 
         <div class="card border-0 shadow-sm rounded-3">
             <div class="card-body p-4">
-                <form action="#" method="POST" class="row g-3">
+                <form action="{{ route('grades.store') }}" method="POST" class="row g-3">
 
+                    @csrf
                     <div class="col-12">
                         <label class="form-label fw-medium">Enrollment</label>
-                        <select class="form-select" required>
-                            <option value="">Select student and course</option>
-                            <option>Dela Cruz, Juan &mdash; IT101 (1st Semester 2025-2026)</option>
-                            <option>Santos, Maria &mdash; IT102 (1st Semester 2025-2026)</option>
-                            <option>Reyes, Pedro &mdash; IT103 (1st Semester 2025-2026)</option>
+                        <select class="form-select" name="enrollment" required>
+                            @foreach ($enrollments as $enrollment)
+                                <option value="{{ $enrollment->id }}">{{ $enrollment->user->first_name }} {{ $enrollment->user->last_name }}</option>
+                            @endforeach
                         </select>
+                        @error('enrollment')
+                            <div class="text-danger">{{ $message }}</div>   
+                        @enderror
                     </div>
 
                     <div class="col-md-4">
                         <label class="form-label fw-medium">Grade</label>
-                        <input type="number" step="0.01" class="form-control" placeholder="1.75" required>
+                        <input type="number" step="0.01" class="form-control" placeholder="1.75" name="grade" required>
+                         @error('grade')
+                            <div class="text-danger">{{ $message }}</div>   
+                        @enderror
                     </div>
 
                     <div class="col-md-8">
                         <label class="form-label fw-medium">Remarks</label>
-                        <select class="form-select">
+                        <select class="form-select" name="remarks" required>
                             <option value="">Select remarks</option>
-                            <option>Passed</option>
-                            <option>Failed</option>
-                            <option>Incomplete</option>
+                            <option value="Passed">Passed</option>
+                            <option value="Failed">Failed</option>
+                            <option value="Incomplete">Incomplete</option>
                         </select>
+                        @error('remarks')
+                            <div class="text-danger">{{ $message }}</div>   
+                        @enderror
                     </div>
 
                     <div class="col-12 pt-2">

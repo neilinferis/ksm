@@ -15,21 +15,14 @@
                     This action cannot be undone.
                 </div>
 
-                <dl class="row mb-4 gy-2">
-                    <dt class="col-sm-3 text-muted fw-medium">Student</dt>
-                    <dd class="col-sm-9 mb-0">Dela Cruz, Juan (2025-0001)</dd>
+                <div class="row mb-4 gy-2">
+                    <p>{{ $grade->enrollment->user->first_name }} {{ $grade->enrollment->user->last_name }} - {{ $grade->enrollment->course->course_code }}</p>
+                    <p>{{ $grade->enrollment->course->name }}</p>
+                    <p>{{ $grade->grade }}</p>
+                    <p>{{ $grade->remarks }}</p>
+                </div>
 
-                    <dt class="col-sm-3 text-muted fw-medium">Course</dt>
-                    <dd class="col-sm-9 mb-0">IT101 &middot; Intro to Programming</dd>
-
-                    <dt class="col-sm-3 text-muted fw-medium">Grade</dt>
-                    <dd class="col-sm-9 mb-0 fw-bold">1.50</dd>
-
-                    <dt class="col-sm-3 text-muted fw-medium">Remarks</dt>
-                    <dd class="col-sm-9 mb-0"><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Passed</span></dd>
-                </dl>
-
-                <form action="#" method="POST">
+                <form action="{{ route('grades.destroy', $grade->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger px-4">Yes, Delete</button>
