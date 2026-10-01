@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="card">
-        <div class="row card-header">
+        <div class="row card-header bg-transparent">
             <div class="col-4"></div>
             <div class="col-4"><h3 class="text-center">List of Courses</h3></div>
             <div class="col-4"><h6 class="text-end mt-2"><a href="{{ route('course.create') }}" class="text-decoration-none">New Course</a></h6></div>
         </div>
-        <div class="row card-body">
+        <div class="rowcard-body p-0">
             <div class="col-12">
                 <div class="card-body px-0 pb-0 overflow-y-auto">
                     @if (count($all_courses) == 0)
@@ -21,11 +21,11 @@
                             <thead>
                                 <tr>
                                     <th class="text-secondary">id</th>
-                                    <th class="text-secondary">last_name</th>
-                                    <th class="text-secondary">first_name</th>
-                                    <th class="text-secondary">middle_name</th>
-                                    <th class="text-secondary">dob</th>
-                                    <th>actions</th>
+                                    <th class="text-secondary">course code</th>
+                                    <th class="text-secondary">name</th>
+                                    <th class="text-secondary">description</th>
+                                    <th class="text-secondary">units</th>
+                                    <th class="text-secondary" style="width: 100px">actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,9 +37,12 @@
                                         <td>{{ $course->description }}</td>                                        
                                         <td>{{ $course->units }}</td>                                             
                                         <td>
+                                            <a href="#" class="btn btn-sm btn-outline-success" id="edit" data-bs-toggle="modal" data-bs-target="#edit-course-{{ $course->id }}"><i class="fa-solid fa-pen"></i></a>
 
+                                            <a href="#" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-course-{{ $course->id }}"><i class="fa-solid fa-trash-can"></i></a>
                                         </td>                                        
                                     </tr>
+                                    @include('courses.modal.actions')
                                 @endforeach
                             </tbody>
                         </table>

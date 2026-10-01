@@ -41,6 +41,32 @@ class CourseController extends Controller
         $this->course->units        =   $request->units;
         $this->course->save();
 
+        return redirect()->route('course.index');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'course_code'   =>  'required|max:20',
+            'name'          =>  'required|max:50',
+            'description'   =>  'required|max:255',
+            'units'         =>  'required'
+        ]);
+
+        $course = $this->course->findOrFail($id);
+        $course->course_code  =   $request->course_code;
+        $course->name         =   $request->name;
+        $course->description  =   $request->description;
+        $course->units        =   $request->units;
+        $course->save();
+
+        return redirect()->back();
+    }
+
+    public function destroy($id)
+    {
+        $this->course->destroy($id);
+
         return redirect()->back();
     }
 }

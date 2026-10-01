@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/index', [CourseController::class, 'index'])->name('index');
         Route::get('/create', [CourseController::class, 'create'])->name('create');
         Route::post('/store', [CourseController::class, 'store'])->name('store');
+        Route::patch('/update/{id}', [CourseController::class, 'update'])->name('update');
+        Route::delete('/destroy/{id}', [CourseController::class, 'destroy'])->name('destroy');
     });
 
     // ENROLLMENT
